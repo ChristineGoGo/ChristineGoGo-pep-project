@@ -1,6 +1,8 @@
 package Service;
 
 import java.util.List;
+import java.util.ArrayList;
+
 
 import DAO.AccountDAO;
 import DAO.MessageDAO;
@@ -89,11 +91,13 @@ public class MessageService {
      */
     public List<Message> getMessagesByUser(int posted_by) {
         Account user = accountDAO.getAccountById(posted_by);
+        List<Message> emptyMessages = new ArrayList<>();
 
         if (!(user == null)) {
             return messageDAO.getMessageByUser(posted_by);
         }
-        return null;
+        // return null;
+        return emptyMessages;
     }
 
     /**

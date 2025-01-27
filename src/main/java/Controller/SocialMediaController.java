@@ -160,12 +160,18 @@ public class SocialMediaController {
     private void getAllMessagesByUserHandler(Context ctx) {
         int posted_by = Integer.parseInt(ctx.pathParam("account_id"));
         List <Message> messages = messageService.getMessagesByUser(posted_by);
+        // int sizeOfMessages = messages == null ? 0 : messages.size();
         // System.out.println("The messages are: " + messages);
+        // System.out.println("The size of messages is: " + sizeOfMessages);
 
-        if (!(messages == null)) {
+
+        if (messages == null) {
+            ctx.status(200);
+        } else {
             ctx.json(messages);
         }
-        ctx.status(200);
+
+        
         
     }
 
