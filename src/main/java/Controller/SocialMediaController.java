@@ -98,9 +98,15 @@ public class SocialMediaController {
         String message_text = message.getMessage_text();
         Message messageToUpdate = messageService.updateMessage(message_id, message_text);
 
-        if ((messageToUpdate == null) || (message_id == 0)) {
+        Message messageFound = messageService.getMessagesById(message_id);
+
+        System.out.println("message text: " + message_text);
+
+        if ((messageFound == null) || !(message_id > 0) || !(message_text.length() > 0) || (message_text.length() > 255)) {
+            // System.out.println("Null message");
             ctx.status(400);        
         } else {
+            // System.out.println("Not Null message");
             ctx.json(mapper.writeValueAsString(messageToUpdate));
             ctx.status(200);  
         }
